@@ -60,16 +60,29 @@ function fibonacci(limit){
   }
 }
 
-function drawRings(){
-  for(i=4;i < fibonacciSeq.length; i++){
+function map_range(v, vmin, vmax, rmin, rmax){
+  return rmin+(rmax-rmin)*(v-vmin) / (vmax-vmin);
+}
+function map_range2(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
 
+function drawRings(){
+  const fb = fibonacciSeq.length;
+  console.log(fb);
+  for(i=0;i < fb; i++){
     for(j=0; j< fibonacciSeq[i]; j++){
-      const angle = (Math.PI*2)/j;
-      let x = Math.sin(angle)*i*5;
-      let y = Math.cos(angle)*i*5;
+      const angle = (Math.PI*2)/fibonacciSeq[i];
+      const sizeIncrement =  map_range(i,0,fb, 20,280);
+      let size = map_range(i,0,fb, 40,1) ;
+      // size = 10;
+      let x = Math.sin(angle*j);
+      let y = Math.cos(angle*j);
+      x*= sizeIncrement;
+      y*= sizeIncrement;
       x+=center.x;
       y+=center.y;
-      const circle = new Circle({x,y}, 5, "grey");
+      const circle = new Circle({x,y}, size, "rgba(255,255,255,.8)");
       circle.draw();
     }
   }
@@ -77,4 +90,3 @@ function drawRings(){
 
 fibonacci(15);
 drawRings();
-console.log(fibonacciSeq);
