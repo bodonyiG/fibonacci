@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
+alert("test");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let fibonacciSeq = [];
